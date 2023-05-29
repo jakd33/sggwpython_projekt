@@ -44,7 +44,7 @@ def register_page(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         user = User.objects.create(username = username)
-        user.set_password(user)
+        user.set_password(password)
         user.save()
         return redirect('/')
 
