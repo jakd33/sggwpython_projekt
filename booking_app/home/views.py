@@ -43,8 +43,6 @@ def home(request):
     if len(amenities):
         hotels_objs = hotels_objs.filter(amenities__amenity_name__in = amenities).distinct()
 
-
-
     context = {'amenities_objs' : amenities_objs , 'hotels_objs' : hotels_objs , 'sort_by' : sort_by 
     , 'search' : search , 'amenities' : amenities}
     return render(request , 'home.html' ,context)
@@ -86,7 +84,7 @@ def login_page(request):
         user_obj = authenticate(username = username, password = password)
         
         if not user_obj:
-            messages.warning(request, 'Nie prawidłowe hasło')
+            messages.warning(request, 'Nieprawidłowe hasło')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         
         login(request, user_obj)
@@ -98,7 +96,8 @@ def login_page(request):
 def register_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        password = request.POST.get('password')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
 
         user_obj = User.objects.filter(username = username)
 
@@ -107,7 +106,7 @@ def register_page(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         user = User.objects.create(username = username)
-        user.set_password(password)
+        user.set_password(password1)
         user.save()
         return redirect('/')
 
