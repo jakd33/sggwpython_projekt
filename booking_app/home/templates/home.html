@@ -19,63 +19,24 @@
 <section class="search-container mb-5 pb-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="row my-3">
-                    
-                   
-
-                    
-                </div>
-                <div class="row mt-2 justify-content-between">
-                    <div class="filter-card">
-                        <h5>Filtruj</h5>
-                        <form action="#">
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <label for="mintopay">Od</label>
-                                    <p>
-                                        <input type="date" name="checkin" id="checkin" class="form-control">
-                                    </p>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="maxtopay">Do</label>
-                                    <p>
-                                        <input type="date" name="checkout" id="checkout" class="form-control">
-                                    </p>
-                                </div>
-                            </div>
-                           
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <input type="submit" class="btn btn-primary btn-block" value="Wybierz">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-
-
-
             <div class="col-lg-9  px-4 mb-5">
                 <form>
                 <div class="row mt-3">
                     <div class="col-md-4">
-                    <div class="form-inline">
-                        <label class="" for="exampleFormControlSelect1">Sortuj</label>
-                        <select class="form-control" name="sort_by" id="exampleFormControlSelect1">
-                            <option value="">Rekomendowane</option>
-                            <option {% if sort_by == 'ASC' %} selected {%endif %} value="ASC">Rosnąco</option>
-                            <option {% if sort_by == 'DSC' %} selected {%endif %} value="DSC">Malejąco</option>
-                           
-                        </select>
-                    </div>
+                        <div class="form-inline">
+                            <label class="" for="exampleFormControlSelect1">Sortuj</label>
+                            <select class="form-control" name="sort_by" id="exampleFormControlSelect1">
+                                <option value="">Rekomendowane</option>
+                                <option {% if sort_by == 'ASC' %} selected {%endif %} value="ASC">Rosnąco</option>
+                                <option {% if sort_by == 'DSC' %} selected {%endif %} value="DSC">Malejąco</option>
+                            
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-inline">
                             <label class="" for="exampleFormControlSelect1">Szukaj</label>
-                            <input name="search" class="form-control" value="{{search}}" placeholder="Search"> 
+                            <input name="search" class="form-control"> 
                         </div>
 
                     </div>
@@ -83,11 +44,11 @@
                         <div class="form-inline">
                            <label class="" for="exampleFormControlSelect1">Udogodnienia</label>
                             <select name="amenities" class="form-control" multiple>
-                            <option value="">Wybierz</option>
-                            {% for amenities_obj in amenities_objs %}
-                            <option {% if amenities_obj.amenity_name in amenities  %} selected {%endif%}value="{{amenities_obj.amenity_name}}">{{amenities_obj.amenity_name}}</option>
+                                <option value="">Wybierz</option>
+                                {% for amenities_obj in amenities_objs %}
+                                <option {% if amenities_obj.amenity_name in amenities  %} selected {%endif%}value="{{amenities_obj.amenity_name}}">{{amenities_obj.amenity_name}}</option>
                                 {% endfor %}
-                        </select>
+                            </select>
                         </div>
 
                     </div>
@@ -132,7 +93,7 @@
                     </div>
                     <div class="col-md-2 border-left text-center more-offers">
                        
-                        <div class="btn btn-success">Sprawdź ofertę</div>
+                        <a style="margin-top: 30px;" type="button" href="/" class="btn btn-success">Zarezerwuj</a>
                     </div>
                 </div>
                 {% endfor %}
