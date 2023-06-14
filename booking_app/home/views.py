@@ -87,7 +87,7 @@ def login_page(request):
         user_obj = authenticate(username = username, password = password)
         
         if not user_obj:
-            messages.warning(request, 'Nieprawidłowy nazwa użytkwonika lub hasło')
+            messages.warning(request, 'Nieprawidłowa nazwa użytkownika lub hasło')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         
         login(request, user_obj)
@@ -107,10 +107,15 @@ def register_page(request):
         if user_obj.exists():
             messages.warning(request, 'Nazwa użytkownika już istnieje')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
+        
+        if password1 != password2:
+            messages.warning(request, 'Hasła różnią się, spróbuj jeszcze raz!')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
         user = User.objects.create(username = username)
         user.set_password(password1)
         user.save()
+        
         return redirect('/login')
 
     return render(request, 'register.html')
