@@ -49,7 +49,7 @@ def login_page(request):
         user_obj = authenticate(username = username, password = password)
         
         if not user_obj:
-            messages.warning(request, 'Nieprawidłowa nazwa użytkownika lub hasło')
+            messages.warning(request, 'Nieprawidłowe hasło')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         
         login(request, user_obj)

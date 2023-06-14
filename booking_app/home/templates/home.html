@@ -19,7 +19,7 @@
 <section class="search-container mb-5 pb-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9  px-4 mb-5">
+            <div class="col-lg-9 px-4 mb-5">
                 <form>
                 <div class="row mt-3">
                     <div class="col-md-4">
@@ -29,7 +29,6 @@
                                 <option value="">Rekomendowane</option>
                                 <option {% if sort_by == 'ASC' %} selected {%endif %} value="ASC">Rosnąco</option>
                                 <option {% if sort_by == 'DSC' %} selected {%endif %} value="DSC">Malejąco</option>
-                            
                             </select>
                         </div>
                     </div>
@@ -38,42 +37,32 @@
                             <label class="" for="exampleFormControlSelect1">Szukaj</label>
                             <input name="search" class="form-control"> 
                         </div>
-
                     </div>
                     <div class="col-md-4">
                         <div class="form-inline">
                            <label class="" for="exampleFormControlSelect1">Udogodnienia</label>
                             <select name="amenities" class="form-control" multiple>
-                                <option value="">Wybierz</option>
                                 {% for amenities_obj in amenities_objs %}
                                 <option {% if amenities_obj.amenity_name in amenities  %} selected {%endif%}value="{{amenities_obj.amenity_name}}">{{amenities_obj.amenity_name}}</option>
                                 {% endfor %}
                             </select>
                         </div>
-
                     </div>
                     <div class="col-md-4">
                      
                             <button style="margin-top: 30px;" type="submit" class="btn btn-success">Znajdź</button>
-                        </div>
+                    </div>
                 </div>
                 </form>
-                
                 {% for hotels_obj in hotels_objs %}
                 <div class="row search-card-result">
-                
-
-                    
-                    <div class="col-md-3">
-                       
+                    <div class="col-md-3"> 
                     <a href="/hotel-detail/{{hotels_obj.uid}}">
                         <img class="img-fluid" src="/media/{{hotels_obj.images.first.images}}" alt="Card image cap">
-                    
-                    </a></div>
-               
+                    </a>
+                    </div>
                     <div class="col-md-5">
                         <h5>{{hotels_obj.hotel_name}}</h5>
-                        
                         <p>
                             {{hotels_obj.description|truncatechars:150}}
                         </p>
@@ -82,18 +71,15 @@
                             <b>{{amenitie.amenity_name}}</b>,
                             {% endfor %}
                         </p>
-                        
                     </div>
                     <div class="col-md-2 border-left text-center more-offers">
-                        
                         <p>Cena za noc</p>
                         <p>{{hotels_obj.hotel_price}} zł</p>
                         <p>Liczba pokoi</p>
                         <p>{{hotels_obj.room_count}}</p>
                     </div>
                     <div class="col-md-2 border-left text-center more-offers">
-                       
-                        <a style="margin-top: 30px;" type="button" href="/" class="btn btn-success">Zarezerwuj</a>
+                        <a style="margin-top: 50%;" type="button" href="/" class="btn btn-success">Zarezerwuj</a>
                     </div>
                 </div>
                 {% endfor %}
