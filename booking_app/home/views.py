@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from .models import (Amenities, Hotel, HotelBooking)
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url='login')
 
 def check_booking(start_date  , end_date ,uid , room_count):
     qs = HotelBooking.objects.filter(
@@ -84,7 +87,7 @@ def login_page(request):
         user_obj = authenticate(username = username, password = password)
         
         if not user_obj:
-            messages.warning(request, 'Nieprawidłowe hasło')
+            messages.warning(request, 'Nieprawidłowy nazwa użytkwonika lub hasło')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         
         login(request, user_obj)
@@ -108,7 +111,7 @@ def register_page(request):
         user = User.objects.create(username = username)
         user.set_password(password1)
         user.save()
-        return redirect('/')
+        return redirect('/login')
 
     return render(request, 'register.html')
 

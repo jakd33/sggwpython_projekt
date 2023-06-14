@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
@@ -11,6 +11,7 @@ urlpatterns = [
     path('hotel-detail/<uid>/', hotel_detail, name="hotel_detail"),
     path('login/', login_page, name='login_page'),
     path('register/', register_page, name='register_page'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
